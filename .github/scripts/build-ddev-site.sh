@@ -106,6 +106,8 @@ cat > .ddev/web-build/Dockerfile.django <<'DOCKEREOF'
 # the Python the site runs on, installed by uv. The image's own Python is too old
 # for the current Django line on some releases of the container tool.
 ENV UV_PYTHON_INSTALL_DIR=/opt/python
+# The packages are copied into the project's virtual environment (the cache is on another file system).
+ENV UV_LINK_MODE=copy
 RUN arch="$(uname -m)" \
     && curl -sSfL "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-${arch}-unknown-linux-gnu.tar.gz" \
        | tar -xz --strip-components=1 -C /usr/local/bin \

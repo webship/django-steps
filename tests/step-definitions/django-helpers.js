@@ -118,7 +118,7 @@ function cutRequest(world) {
 }
 
 /** The hint of a failure where the browser cut the request. */
-const CUT_HINT = 'The browser cut the request (a network change on the machine, such as a container starting); nothing is wrong with the scenario. Run it again. On a shared machine, run the suite in the project\'s container (cmd-tools-testing.sh <project> --run in the Webship Workspace), where the network of the host does not reach.';
+const CUT_HINT = 'The request was cut, or the site\'s name did not resolve, because the network of the machine changed (a container starting); nothing is wrong with the scenario. Run it again. On a shared machine, run the suite in the project\'s container (cmd-tools-testing.sh <project> --run in the Webship Workspace), where the network of the host does not reach.';
 
 /** The hint for a failure: the cut request's when the browser cut it, else the one given. */
 function hintFor(world, hint) {
@@ -478,9 +478,18 @@ async function dataClient(world) {
       try {
         return await fn();
       } catch (err) {
-        // A network change on the machine cuts a request now and then: go again, twice.
-        if (attempt >= 2 || !/ERR_NETWORK_CHANGED|ECONNRESET|socket hang up|ETIMEDOUT|EPIPE/i.test(String(err && err.message))) throw err;
-        await new Promise((r) => setTimeout(r, 500));
+        // A network change on the machine cuts a request now and then, or the site's name does not
+        // resolve for a moment (a container network starting): go again, four times, waiting longer
+        // each time; then say what happened.
+        const passing = /ERR_NETWORK_CHANGED|ECONNRESET|socket hang up|ETIMEDOUT|EPIPE|EAI_AGAIN/i.test(String(err && err.message));
+        if (passing && attempt < 4) {
+          await new Promise((r) => setTimeout(r, 500 * 2 ** attempt));
+          continue;
+        }
+        if (passing) {
+          throw friendly({ message: `The test-data steps could not reach the site: ${String(err.message).split('\n')[0]}.`, cause: err, hint: CUT_HINT });
+        }
+        throw err;
       }
     }
   };
