@@ -1,0 +1,64 @@
+{
+  "name": "@webship-js/django-steps",
+  "version": "2.0.0",
+  "description": "Cucumber step definitions for the Django admin, a plugin for webship-js (Playwright and Cucumber): the admin login and logout; the index with its apps and models; the change list with its search, filters, sorting, date drill-down, pagination, selection across pages, actions and the \"Delete selected\" confirmation; the add and change forms with their fieldsets, read-only fields, autocomplete and two-list selectors, inline rows, validation errors, messages and save buttons; the delete confirmation with its related objects and the history page; the password change; users and groups; and view-only access.",
+  "main": "tests/step-definitions/django-session.steps.js",
+  "files": [
+    "tests/step-definitions/",
+    "tests/features/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "cucumber-js --config cucumber.js",
+    "test:dry": "cucumber-js --config cucumber.js --dry-run",
+    "test:examples": "node tests/check-examples.js",
+    "test:paths": "node tests/check-paths.js",
+    "test:must-fail": "node tests/check-must-fail.js",
+    "test:chromium": "BROWSER=chromium cucumber-js --config cucumber.js",
+    "test:firefox": "BROWSER=firefox cucumber-js --config cucumber.js",
+    "test:webkit": "BROWSER=webkit cucumber-js --config cucumber.js",
+    "test:headed": "HEADLESS=false cucumber-js --config cucumber.js",
+    "generate-reports": "generate-reports",
+    "test:fast": "SLOW_MO=0 cucumber-js --config cucumber.js"
+  },
+  "keywords": [
+    "webship-js",
+    "django",
+    "django-admin",
+    "admin",
+    "cucumber",
+    "cucumber-js",
+    "playwright",
+    "bdd",
+    "testing",
+    "e2e",
+    "gherkin"
+  ],
+  "author": "Webship.co",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webship/django-steps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/webship/django-steps/issues"
+  },
+  "homepage": "https://github.com/webship/django-steps#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 20.0"
+  },
+  "peerDependencies": {
+    "webship-js": "^2.0.16"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.0",
+    "webship-js": "^2.0.16"
+  },
+  "overrides": {
+    "@cucumber/cucumber": "^12"
+  }
+}
