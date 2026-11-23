@@ -49,7 +49,7 @@ every push and pull request, then the assertions that must fail; see
 ## From nothing to a green run
 
 What the machine needs: Docker, [DDEV](https://ddev.com), git, python3, and
-Node.js 20 or later with npm. Python, Django, PostgreSQL and the site's server
+Node.js 24 or later with npm. Python, Django, PostgreSQL and the site's server
 run in DDEV's containers.
 
 **1. The site.** The pack's own build script (the one CI runs) makes the site in
@@ -257,7 +257,7 @@ link and "Show counts").
 
 ## Requirements
 
-- Node.js 20 or later
+- Node.js 24 or later
 - A webship-js 2.0 test project (webship-js 2.0.16 or later)
 - A Django project with the admin (`django.contrib.admin`), 5.2 or later, with
   staff accounts on it for the suite (a superuser among them, for the test-object
