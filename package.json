@@ -1,6 +1,6 @@
 {
   "name": "@webship-js/django-steps",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Cucumber step definitions for the Django admin, a plugin for webship-js (Playwright and Cucumber): the admin login and logout; the index with its apps and models; the change list with its search, filters, sorting, date drill-down, pagination, selection across pages, actions and the \"Delete selected\" confirmation; the add and change forms with their fieldsets, read-only fields, autocomplete and two-list selectors, inline rows, validation errors, messages and save buttons; the delete confirmation with its related objects and the history page; the password change; users and groups; and view-only access.",
   "main": "tests/step-definitions/django-session.steps.js",
   "files": [
